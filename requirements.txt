@@ -1,0 +1,14 @@
+pandas
+scikit-learn
+seaborn
+matplotlib
+cloudpickle
+
+torch
+
+
+torchtext
+torchinfo
+ipykernel
+notebook
+optuna
