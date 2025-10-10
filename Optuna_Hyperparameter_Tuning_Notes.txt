@@ -1,0 +1,25 @@
+Notes on Optuna Hyperparameter Tuning
+
+- Optuna is a powerful hyperparameter optimization framework that helps find the most relevant parameter values based on the problem statement.
+- Internally, Optuna uses a smart Bayesian optimization technique to efficiently explore the hyperparameter space.
+
+Key Steps in Using Optuna:
+1. Define the Objective Function – In Optuna, we create a Python function (commonly called `objective`) where the first argument is a `trial` object provided by Optuna.
+2. Define the Search Space – Inside the objective function, specify the hyperparameter search space using methods like `trial.suggest_float()`, `trial.suggest_int()`, etc.
+3. Initialize the Model – Create an instance of the model (e.g., XGBoost, Random Forest, etc.) using the sampled hyperparameters.
+*. Parameter Initializing (means ANN model parameter)
+4. Train the Model – Train the model on the training dataset within the objective function.
+5. Evaluate the Model – Assess model performance using a suitable metric (e.g., accuracy, RMSE, F1-score) and return this metric as the function’s output.
+
+Note:
+Optuna will automatically minimize or maximize the returned metric based on your direction 
+setting (direction="minimize" or direction="maximize").
+#agar objective error or loss function dekh raaha hu toh direction minimize 
+#agar objective accuracy score dekh raaha hu toh direction minimize 
+
+
+
+#for imbalace datset ke liye used scalepos weights
+# Weighted BCE for imbalanced dataset
+pos_weight = torch.tensor([(y_train_tensor == 0).sum() / (y_train_tensor == 1).sum()], device=device)
+loss_fxn = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
